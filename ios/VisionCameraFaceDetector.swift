@@ -71,6 +71,47 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
       return faceContoursTypesMap
     }
     
+    private static func processLandMarks(from face: Face) -> [String:[String: CGFloat?]] {
+      let faceLandmarkTypes = [
+        FaceLandmarkType.leftCheek,
+        FaceLandmarkType.rightCheek,
+        FaceLandmarkType.leftEye,
+        FaceLandmarkType.rightEye,
+        FaceLandmarkType.leftEar,
+        FaceLandmarkType.rightEar,
+        FaceLandmarkType.noseBase,
+        FaceLandmarkType.mouthLeft,
+        FaceLandmarkType.mouthRight,
+        FaceLandmarkType.mouthBottom,
+      ]
+      
+      let faceLandmarksTypesStrings = [
+        "LEFT_CHEEK",
+        "RIGHT_CHEEK",
+        "LEFT_EYE",
+        "RIGHT_EYE",
+        "LEFT_EAR",
+        "RIGHT_EAR",
+        "NOSE_BASE",
+        "MOUTH_LEFT",
+        "MOUTH_RIGHT",
+        "MOUTH_BOTTOM"
+      ];
+      
+        var faceLandMarksTypesMap: [String: [String: CGFloat?]] = [:]
+      
+      for i in 0..<faceLandmarkTypes.count {
+        let landmark = face.landmark(ofType: faceLandmarkTypes[i]);
+        let position = [
+            "x": landmark?.position.x,
+            "y": landmark?.position.y
+        ]
+        faceLandMarksTypesMap[faceLandmarksTypesStrings[i]] = position
+      }
+      
+      return faceLandMarksTypesMap
+    }
+    
     private static func processBoundingBox(from face: Face) -> [String:Any] {
         let frameRect = face.frame
 
@@ -92,8 +133,9 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
     
     @objc
     public static func callback(_ frame: Frame!, withArgs args: [Any]!) -> Any! {
+        let config = getConfig(withArgs: args)
         if faceDetector == nil {
-            initFD(config: args[0] as? FaceDetectorOptions)
+            initFD(config: config)
         }
         let image = VisionImage(buffer: frame.buffer)
         image.orientation = .up
@@ -114,6 +156,7 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
                     map["smilingProbability"] = face.smilingProbability
                     map["bounds"] = processBoundingBox(from: face)
                     map["contours"] = processContours(from: face)
+                    map["landMarks"] = processLandMarks(from: face)
                     
                     faceAttributes.append(map)
                 }
@@ -123,7 +166,7 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
         }
         return faceAttributes
     }
-
+    
     static func initFD(config: [String:Any]?) {
         let options = FaceDetectorOptions()
         
@@ -150,7 +193,7 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
        
         faceDetector = FaceDetector.faceDetector(options: options)
     }
-
+    
     static func getConfig(withArgs args: [Any]!) -> [String:Any]! {
            if args.count > 0 {
                let config = args[0] as? [String:Any]

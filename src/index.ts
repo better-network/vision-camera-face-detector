@@ -18,23 +18,39 @@ export interface Face {
     height: number;
     width: number;
   };
-  contours: {
-    FACE: Point[];
-    NOSE_BOTTOM: Point[];
-    LOWER_LIP_TOP: Point[];
-    RIGHT_EYEBROW_BOTTOM: Point[];
-    LOWER_LIP_BOTTOM: Point[];
-    NOSE_BRIDGE: Point[];
-    RIGHT_CHEEK: Point[];
-    RIGHT_EYEBROW_TOP: Point[];
-    LEFT_EYEBROW_TOP: Point[];
-    UPPER_LIP_BOTTOM: Point[];
-    LEFT_EYEBROW_BOTTOM: Point[];
-    UPPER_LIP_TOP: Point[];
-    LEFT_EYE: Point[];
-    RIGHT_EYE: Point[];
-    LEFT_CHEEK: Point[];
-  };
+  contours: Contours;
+  landMarks: Landmarks;
+}
+
+export interface Contours {
+  FACE: Point[];
+  NOSE_BOTTOM: Point[];
+  LOWER_LIP_TOP: Point[];
+  RIGHT_EYEBROW_BOTTOM: Point[];
+  LOWER_LIP_BOTTOM: Point[];
+  NOSE_BRIDGE: Point[];
+  RIGHT_CHEEK: Point[];
+  RIGHT_EYEBROW_TOP: Point[];
+  LEFT_EYEBROW_TOP: Point[];
+  UPPER_LIP_BOTTOM: Point[];
+  LEFT_EYEBROW_BOTTOM: Point[];
+  UPPER_LIP_TOP: Point[];
+  LEFT_EYE: Point[];
+  RIGHT_EYE: Point[];
+  LEFT_CHEEK: Point[];
+}
+
+export interface Landmarks {
+  LEFT_CHEEK: Point;
+  RIGHT_CHEEK: Point;
+  LEFT_EYE: Point;
+  RIGHT_EYE: Point;
+  LEFT_EAR: Point;
+  RIGHT_EAR: Point;
+  NOSE_BASE: Point;
+  MOUTH_LEFT: Point;
+  MOUTH_RIGHT: Point;
+  MOUTH_BOTTOM: Point;
 }
 
 export interface FaceDetectionOptions {
