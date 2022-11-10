@@ -94,3 +94,5 @@ export function scanFaces(
   // eslint-disable-next-line no-undef
   return __scanFaces(frame, options);
 }
+
+export * from './hook';
