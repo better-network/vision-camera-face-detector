@@ -48,7 +48,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "react-native-reanimated": "2.2.0",
+    "react-native-reanimated": "^2.3.0-beta.2",
     "react-native-vision-camera": "2.9.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
