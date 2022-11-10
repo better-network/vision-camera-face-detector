@@ -1,5 +1,5 @@
 {
-  "name": "vision-camera-face-detector",
+  "name": "@better-network/vision-camera-face-detector",
   "version": "0.1.8",
   "description": "VisionCamera Frame Processor Plugin to detect faces using MLKit Vision Face Detector",
   "main": "lib/commonjs/index",
@@ -24,7 +24,7 @@
   "scripts": {
     "test": "jest",
     "typescript": "tsc --noEmit",
-    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "lint": "eslint \"**/*.{js,ts,tsx}\" --fix",
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
@@ -36,13 +36,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/rodgomesc/vision-camera-face-detector",
-  "author": "Rodrigo gomes <rodgomesc@gmail.com> (https://github.com/rodgomesc)",
+  "repository": "https://github.com/better-network/vision-camera-face-detector",
+  "author": "Rodrigo gomes <rodgomesc@gmail.com> (https://github.com/rodgomesc), Orland Karamani <orland.karamani@better.network>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rodgomesc/vision-camera-face-detector/issues"
+    "url": "https://github.com/better-network/vision-camera-face-detector/issues"
   },
-  "homepage": "https://github.com/rodgomesc/vision-camera-face-detector#readme",
+  "homepage": "https://github.com/better-network/vision-camera-face-detector#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
