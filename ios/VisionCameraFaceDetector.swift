@@ -8,16 +8,7 @@ import AVFoundation
 
 @objc(VisionCameraFaceDetector)
 public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
-    static var FaceDetectorOption: FaceDetectorOptions = {
-        let option = FaceDetectorOptions()
-        option.contourMode = .all
-        option.classificationMode = .all
-        option.landmarkMode = .all
-        option.performanceMode = .accurate // doesn't work in fast mode!, why?
-        return option
-    }()
-    
-    static var faceDetector = FaceDetector.faceDetector(options: FaceDetectorOption)
+    private static var faceDetector: FaceDetector! = nil;
     
     private static func processContours(from face: Face) -> [String:[[String:CGFloat]]] {
       let faceContoursTypes = [
@@ -100,7 +91,10 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
     }
     
     @objc
-    public static func callback(_ frame: Frame!, withArgs _: [Any]!) -> Any! {
+    public static func callback(_ frame: Frame!, withArgs args: [Any]!) -> Any! {
+        if faceDetector == nil {
+            initFD(config: args[0] as? FaceDetectorOptions)
+        }
         let image = VisionImage(buffer: frame.buffer)
         image.orientation = .up
         
@@ -128,5 +122,40 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
             return nil
         }
         return faceAttributes
+    }
+
+    static func initFD(config: [String:Any]?) {
+        let options = FaceDetectorOptions()
+        
+        if config?["landmarkMode"] as? String == "all" {
+            options.landmarkMode = .all
+        }
+        
+        if config?["contourMode"] as? String == "all" {
+            options.contourMode = .all
+        }
+        
+        if config?["performanceMode"] as? String == "accurate" {
+            // doesn't work in fast mode!, why?
+            options.performanceMode = .accurate
+        }
+        
+        if config?["classificationMode"] as? String == "all" {
+            options.classificationMode = .all
+        }
+        
+        if config?["minFaceSize"] as? Double != nil {
+            options.minFaceSize = CGFloat(config?["minFaceSize"] as? Double ?? 0.1)
+        }
+       
+        faceDetector = FaceDetector.faceDetector(options: options)
+    }
+
+    static func getConfig(withArgs args: [Any]!) -> [String:Any]! {
+           if args.count > 0 {
+               let config = args[0] as? [String:Any]
+               return config
+           }
+           return nil
     }
 }
