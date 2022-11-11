@@ -114,18 +114,13 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
     
     private static func processBoundingBox(from face: Face) -> [String:Any] {
         let frameRect = face.frame
-
-        let offsetX = (frameRect.midX - ceil(frameRect.width)) / 2.0
-        let offsetY = (frameRect.midY - ceil(frameRect.height)) / 2.0
-
-        let x = frameRect.maxX + offsetX
-        let y = frameRect.minY + offsetY
-
+//      The implementation from this github repo seems to work better for the frameRect
+//      Github link -> https://github.com/a7medev/react-native-ml-kit/blob/main/face-detection/ios/FaceDetection.m
         return [
-          "x": frameRect.midX + (frameRect.midX - x),
-          "y": frameRect.midY + (y - frameRect.midY),
-          "width": frameRect.width,
-          "height": frameRect.height,
+          "x":frameRect.origin.x,
+          "y": frameRect.origin.y,
+          "width": frameRect.size.width,
+          "height": frameRect.size.height,
           "boundingCenterX": frameRect.midX,
           "boundingCenterY": frameRect.midY
         ]
