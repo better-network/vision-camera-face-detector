@@ -17,6 +17,7 @@ export interface Face {
     x: number;
     height: number;
     width: number;
+    aspectRatio: number;
   };
   contours: Contours;
   landMarks: Landmarks;
