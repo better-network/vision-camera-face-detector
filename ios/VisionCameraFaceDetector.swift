@@ -112,7 +112,7 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
       return faceLandMarksTypesMap
     }
     
-    private static func processBoundingBox(from face: Face) -> [String:Any] {
+    private static func processBoundingBox(from face: Face, photoWidth: CGFloat?) -> [String:Any] {
         let frameRect = face.frame
 //      The implementation from this github repo seems to work better for the frameRect
 //      Github link -> https://github.com/a7medev/react-native-ml-kit/blob/main/face-detection/ios/FaceDetection.m
