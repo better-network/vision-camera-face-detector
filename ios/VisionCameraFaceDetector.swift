@@ -122,7 +122,8 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
           "width": frameRect.size.width,
           "height": frameRect.size.height,
           "boundingCenterX": frameRect.midX,
-          "boundingCenterY": frameRect.midY
+          "boundingCenterY": frameRect.midY,
+          "aspectRatio": frameRect.size.width / photoWidth!
         ]
     }
     
@@ -133,6 +134,7 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
             initFD(config: config)
         }
         let image = VisionImage(buffer: frame.buffer)
+        let photoWidth = MLImage(sampleBuffer: frame.buffer)?.width
         image.orientation = .up
         
         var faceAttributes: [Any] = []
@@ -149,7 +151,7 @@ public class VisionCameraFaceDetector: NSObject, FrameProcessorPluginBase {
                     map["leftEyeOpenProbability"] = face.leftEyeOpenProbability
                     map["rightEyeOpenProbability"] = face.rightEyeOpenProbability
                     map["smilingProbability"] = face.smilingProbability
-                    map["bounds"] = processBoundingBox(from: face)
+                    map["bounds"] = processBoundingBox(from: face, photoWidth: photoWidth)
                     map["contours"] = processContours(from: face)
                     map["landMarks"] = processLandMarks(from: face)
                     
