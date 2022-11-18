@@ -48,7 +48,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@better-network/react-native-vision-camera": "^2.16.1",
+    "@better-network/react-native-vision-camera": "^2.16.2",
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
     "@release-it/conventional-changelog": "^2.0.0",
