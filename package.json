@@ -1,6 +1,6 @@
 {
   "name": "@better-network/vision-camera-face-detector",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "VisionCamera Frame Processor Plugin to detect faces using MLKit Vision Face Detector",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
