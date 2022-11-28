@@ -48,7 +48,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@better-network/react-native-vision-camera": "^2.16.3",
+    "react-native-vision-camera": "^2.15.2",
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
     "@release-it/conventional-changelog": "^2.0.0",
@@ -73,7 +73,7 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "@better-network/react-native-vision-camera": ">= 2"
+    "react-native-vision-camera": ">= 2"
   },
   "jest": {
     "preset": "react-native",

@@ -1,4 +1,4 @@
-import { Frame, useFrameProcessor } from '@better-network/react-native-vision-camera';
+import { Frame, useFrameProcessor } from 'react-native-vision-camera';
 import { useState } from 'react';
 import { runOnJS, SharedValue, useSharedValue } from 'react-native-reanimated';
 import { Face, FaceDetectionOptions, scanFaces } from '.';

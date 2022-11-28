@@ -18,9 +18,9 @@ import { StyleSheet } from 'react-native';
 import {
   useCameraDevices,
   useFrameProcessor,
-} from '@better-network/react-native-vision-camera';
+} from 'react-native-vision-camera';
 
-import { Camera, useCameraDevices, useFrameProcessor, } from '@better-network/react-native-vision-camera';
+import { Camera, useCameraDevices, useFrameProcessor, } from 'react-native-vision-camera';
 import { scanFaces, Face } from 'vision-camera-face-detector';
 
 export default function App() {

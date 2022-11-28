@@ -1,4 +1,4 @@
-import type { Frame } from '@better-network/react-native-vision-camera';
+import type { Frame } from 'react-native-vision-camera';
 
 /**
  * Scans Faces.
